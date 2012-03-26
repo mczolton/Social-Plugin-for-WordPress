@@ -1,0 +1,49 @@
+.zosp-social-buttons
+{
+	padding-bottom: 18px;
+	height: 20px;
+	/* border: 1px solid red; */
+}
+
+.zosp-social-buttons .zosp-social-button
+{
+	display: block;
+	float: left;
+	height: 26px;
+	width: 120px; 
+	/* border: 1px solid red; */ 
+	padding: 0;
+	margin: 0;
+}
+
+.zosp-social-buttons .zosp-social-twitter
+{
+	height: 25px;
+	width: auto;
+	padding-top: 1px;
+}
+
+.zosp-social-buttons .zosp-social-plus-one
+{
+	height: 25px;
+	width: auto;
+	padding-top: 1px;
+}
+
+.zosp-social-buttons .zosp-social-facebook
+{
+	width: 120px;
+}
+
+#facebook-comments 
+{
+	margin: 0 auto;
+}
+
+#facebook-reply-title
+{
+	font: normal 36px 'Droid Sans', Arial, sans-serif;
+	text-shadow: 1px 1px 1px #ccc;
+    	font-size: 18px;
+	padding: 18px 0;
+}
