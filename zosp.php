@@ -3,7 +3,7 @@
 /*  Plugin Name: Zolton.org Social Plugin
     Plugin URI: http://www.zolton.org/projects/social-plugin-for-wordpress/
     Description: Simple social networking integration for Wordpress.
-    Version: 1.3.1	
+    Version: 1.4.0	
     Author: Mark Zolton
     Author URI: http://www.zolton.org
     License: GPL2
@@ -79,6 +79,7 @@ function zosp_options_init() {
 	add_settings_field('zosp_options_fb_image', 'Default Facebook Image', 'zosp_options_fb_image_string', 'zosp-plugin', 'zosp_options_advanced');
 	add_settings_field('zosp_options_fb_comment_width', 'Facebook Comment Field Width (pixels)', 'zosp_options_fb_comment_width_string', 'zosp-plugin', 'zosp_options_advanced');
 	add_settings_field('zosp_options_fb_like_send', 'Show Facebook Send Button', 'zosp_options_fb_like_send_string', 'zosp-plugin', 'zosp_options_advanced');
+add_settings_field('zosp_options_pinit_button', 'Show Pinterest Pin It Button', 'zosp_options_pinit_button_string', 'zosp-plugin', 'zosp_options_advanced');
 	add_settings_field('zosp_options_hide_wpcomments', 'Hide Wordpress Comments', 'zosp_options_hide_wpcomments_string', 'zosp-plugin', 'zosp_options_advanced');
 }
 
@@ -166,6 +167,18 @@ function zosp_options_fb_like_send_string() {
 	value='1' $checked />";
 }
 
+function zosp_options_pinit_button_string() {
+	$options = get_option('zosp_options');
+	$checked = null;
+	
+	if($options['pinit_button'] == '1') { $checked = 'checked=\'checked\''; } 
+	
+	echo "<input id='zosp_options_pinit_button' type='checkbox' name='zosp_options[pinit_button]' 
+	value='1' $checked />";
+
+	echo "<p><strong>Note:</strong> Pin It button will only display on posts that have a featured image.</p>";
+}
+
 function zosp_options_hide_wpcomments_string() {
 	$options = get_option('zosp_options');
 	$checked = null;
@@ -185,6 +198,7 @@ function zosp_options_validate($input) {
 	$options['fb_image'] = trim($input['fb_image']);
 	$options['fb_comment_width'] = trim($input['fb_comment_width']);
 	$options['fb_like_send'] = trim($input['fb_like_send']);
+	$options['pinit_button'] = trim($input['pinit_button']);
 	$options['hide_wpcomments'] = trim($input['hide_wpcomments']);
 
 	return $options;
@@ -268,6 +282,10 @@ function zosp_facebook_js_sdk($c) {
 END;
 
 ?>
+<!-- Pinterest -->
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+
+<!-- Google Plus One -->
 <script type="text/javascript">
   (function() {
     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -323,20 +341,40 @@ function zosp_social_buttons( $content ) {
 		
 		$options = get_option('zosp_options');
 		
+		$title = esc_attr( single_post_title( '', FALSE ) );
+		$site_name = esc_attr( get_bloginfo( 'name' ) );
+		$title .= ' from ' . $site_name;
+
 		$url = esc_url( get_permalink() );
 		$twitter_username = $options['twitter_username'];
 		$send = null;
 		
 		if($options['fb_like_send'] == '1') { $send = 'true'; }
 		else { $send = 'false'; } 
-		
+
+		// Get the featured image, if one exists.
+		$image = null;
+       		if ( has_post_thumbnail( get_the_ID() ) ) {
+            		$image = esc_url( wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) ) );
+        	}
+
 		$new_content = <<<END
 <!-- ZO: Social Buttons --> 
 <div class="zosp-social-buttons">
-	<div class="zosp-social-button zosp-social-plus-one"><g:plusone size="medium"></g:plusone></div>
-	<div class="zosp-social-button zosp-social-twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-count="none" data-via="{$twitter_username}">Tweet</a>
-	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
-	<div class="zosp-social-button zosp-social-facebook"><fb:like href="{$url}" layout="button_count" show_faces="false" width="400" font="" send="{$send}"></fb:like></div>
+END;
+
+		if($options['pinit_button'] == '1' && $image != null)
+		{
+			$new_content .= <<<END
+<div class="zosp-social-button zosp-social-pinit"><a href="http://pinterest.com/pin/create/button/?url={$url}&description={$title}&media={$image}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div>
+END;
+		}
+
+		$new_content .= <<<END
+<div class="zosp-social-button zosp-social-plusone"><g:plusone size="medium"></g:plusone></div>
+<div class="zosp-social-button zosp-social-twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-count="none" data-via="{$twitter_username}">Tweet</a>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+<div class="zosp-social-button zosp-social-facebook"><fb:like href="{$url}" layout="button_count" show_faces="false" width="400" font="" send="{$send}"></fb:like></div>
 </div>
 <!-- ZO: End Social Buttons -->
 END;

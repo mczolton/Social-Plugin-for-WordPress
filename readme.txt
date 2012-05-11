@@ -3,8 +3,8 @@ Contributors: mczolton
 Donate link: http://zolton.org/
 Tags: facebook, twitter, social, google
 Requires at least: 3.1
-Tested up to: 3.3.1
-Stable tag: 1.3.1
+Tested up to: 3.3.2
+Stable tag: 1.4.0
 
 A simple plugin for WordPress that integrates a blog with popular social 
 networking sites such as Facebook and Twitter.
@@ -27,6 +27,7 @@ page for use as the featured image on Facebook.
 * Generates a Facebook Comment section for posts and pages.
 * Includes the Twitter Tweet Button on posts and pages.
 * Includes the Google +1 Button on posts and pages.
+* Includes the Pinterest Pin It Button on posts and pages.
 * Optionally hides Wordpress comments.
 * Configurable via Wordpress setting page.
 
@@ -51,12 +52,20 @@ At the very least, you need to specify a Facebook App ID and a Twitter username.
 Try using Facebook's [URL Linter](http://developers.facebook.com/tools/lint/) 
 to see if the URL for the page in question generates any errors.
 
+= The Pinterest Pin It button does not display despite the fact that it is configured to do so. =
+The Pinterest Pin It button requires that the post or page include a featured image. Check your 
+post or page to ensure that a featured image is set.
+
 == Screenshots ==
 
 1. screenshot-1.png
 1. screenshot-2.png
 
 == Changelog ==
+
+= 1.4.0 =
+* Tested with Wordpress 3.3.2.
+* Added support for the Pinterest Pin It Button.
 
 = 1.3.1 =
 * Fixed a conflict with the social button class and select Wordpress themes. 

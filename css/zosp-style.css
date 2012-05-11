@@ -10,20 +10,14 @@
 	display: block;
 	float: left;
 	height: 26px;
-	width: 120px; 
-	/* border: 1px solid red; */ 
+	/* border: 1px solid blue; */
 	padding: 0;
 	margin: 0;
 }
 
-.zosp-social-buttons .zosp-social-twitter
-{
-	height: 25px;
-	width: auto;
-	padding-top: 1px;
-}
-
-.zosp-social-buttons .zosp-social-plus-one
+.zosp-social-buttons .zosp-social-twitter,
+.zosp-social-buttons .zosp-social-plusone,
+.zosp-social-buttons .zosp-social-pinit
 {
 	height: 25px;
 	width: auto;
@@ -32,7 +26,8 @@
 
 .zosp-social-buttons .zosp-social-facebook
 {
-	width: 120px;
+	min-width: 130px;
+        max-width: 150px;
 }
 
 #facebook-comments 
