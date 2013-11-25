@@ -3,12 +3,12 @@
 /*  Plugin Name: Zolton.org Social Plugin
     Plugin URI: http://www.zolton.org/projects/social-plugin-for-wordpress/
     Description: Simple social networking integration for Wordpress.
-    Version: 1.4.0	
+    Version: 1.5.0	
     Author: Mark Zolton
     Author URI: http://www.zolton.org
     License: GPL2
 
-    Copyright 2012  Mark Zolton  (email : mark@zolton.org)
+    Copyright 2013  Mark Zolton  (email : mark@zolton.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -79,7 +79,7 @@ function zosp_options_init() {
 	add_settings_field('zosp_options_fb_image', 'Default Facebook Image', 'zosp_options_fb_image_string', 'zosp-plugin', 'zosp_options_advanced');
 	add_settings_field('zosp_options_fb_comment_width', 'Facebook Comment Field Width (pixels)', 'zosp_options_fb_comment_width_string', 'zosp-plugin', 'zosp_options_advanced');
 	add_settings_field('zosp_options_fb_like_send', 'Show Facebook Send Button', 'zosp_options_fb_like_send_string', 'zosp-plugin', 'zosp_options_advanced');
-add_settings_field('zosp_options_pinit_button', 'Show Pinterest Pin It Button', 'zosp_options_pinit_button_string', 'zosp-plugin', 'zosp_options_advanced');
+	add_settings_field('zosp_options_pinit_button', 'Show Pinterest Pin It Button', 'zosp_options_pinit_button_string', 'zosp-plugin', 'zosp_options_advanced');
 	add_settings_field('zosp_options_hide_wpcomments', 'Hide Wordpress Comments', 'zosp_options_hide_wpcomments_string', 'zosp-plugin', 'zosp_options_advanced');
 }
 
@@ -263,22 +263,15 @@ function zosp_facebook_js_sdk($c) {
 	$options = get_option('zosp_options');
 	$app_id = $options['fb_appid'];
 
-    	echo <<<END
-    <div id="fb-root"></div>
-    <script type="text/javascript">
-      window.fbAsyncInit = function() {
-        FB.init({appId: '{$app_id}', status: true, cookie: true,
-                 xfbml: true});
-      };
-      (function() {
-        var e = document.createElement('script');
-        e.type = 'text/javascript';
-        e.src = document.location.protocol +
-          '//connect.facebook.net/en_US/all.js';
-        e.async = true;
-        document.getElementById('fb-root').appendChild(e);
-      }());
-    </script>
+	echo <<<END
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={$app_id}";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 END;
 
 ?>
@@ -366,16 +359,30 @@ END;
 		if($options['pinit_button'] == '1' && $image != null)
 		{
 			$new_content .= <<<END
-<div class="zosp-social-button zosp-social-pinit"><a href="http://pinterest.com/pin/create/button/?url={$url}&description={$title}&media={$image}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div>
+<div class="zosp-social-button zosp-social-pinit">
+	<a href="//www.pinterest.com/pin/create/button/?url={$url}&media={$image}&description={$title}" data-pin-do="buttonPin" data-pin-config="above" data-pin-color="white"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_20.png" /></a>
+</div>
 END;
 		}
 
 		$new_content .= <<<END
-<div class="zosp-social-button zosp-social-plusone"><g:plusone size="medium"></g:plusone></div>
-<div class="zosp-social-button zosp-social-twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-count="none" data-via="{$twitter_username}">Tweet</a>
-<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
-<div class="zosp-social-button zosp-social-facebook"><fb:like href="{$url}" layout="button_count" show_faces="false" width="400" font="" send="{$send}"></fb:like></div>
+<!-- Google+ -->
+<div class="zosp-social-button zosp-social-plusone">
+	<div class="g-plusone" data-size="tall" data-annotation="bubble"></div>
 </div>
+
+<!-- Twitter -->
+<div class="zosp-social-button zosp-social-twitter">
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="{$twitter_username}" data-count="vertical">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+	
+<!-- Facebook -->
+<div class="zosp-social-button zosp-social-facebook">
+	<div class="fb-like" data-href="{$url}" data-layout="box_count" data-action="like" data-show-faces="false" data-share="{$send}"></div>
+</div>
+
+</div>			
 <!-- ZO: End Social Buttons -->
 END;
 
