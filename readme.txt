@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: mczolton
 Donate link: http://zolton.org/
-Tags: facebook, twitter, social, google
-Requires at least: 3.1
-Tested up to: 3.3.2
-Stable tag: 1.4.0
+Tags: facebook, twitter, social, google, pinterest
+Requires at least: 3.7
+Tested up to: 3.7.1
+Stable tag: 1.5.1
 
 A simple plugin for WordPress that integrates a blog with popular social 
 networking sites such as Facebook and Twitter.
@@ -63,6 +63,11 @@ post or page to ensure that a featured image is set.
 
 == Changelog ==
 
+= 1.5.1 =
+* Updated social plugins to HTML5 compatible versions (where available).
+* Modified the alignment of social plugin buttons.
+* Tested with Wordpress 3.7.1.
+
 = 1.4.0 =
 * Tested with Wordpress 3.3.2.
 * Added support for the Pinterest Pin It Button.
@@ -98,9 +103,9 @@ Like button.
 
 == Upgrade Notice ==
 
-= 1.3 =
-Added a settings page. Editing the plugin source is no longer required. Added 
-support for the Google +1 Button.
+= 1.5.1 =
+Updated social plugins to HTML5 compatible versions (where available). Modified the 
+alignment of social plugin buttons.
 
 == Known Issues ==
 * "Leave a Comment" link is still visible when Wordpress comments are disabled.
