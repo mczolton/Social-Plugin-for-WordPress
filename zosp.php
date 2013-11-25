@@ -3,7 +3,7 @@
 /*  Plugin Name: Zolton.org Social Plugin
     Plugin URI: http://www.zolton.org/projects/social-plugin-for-wordpress/
     Description: Simple social networking integration for Wordpress.
-    Version: 1.5.0	
+    Version: 1.5.1	
     Author: Mark Zolton
     Author URI: http://www.zolton.org
     License: GPL2
