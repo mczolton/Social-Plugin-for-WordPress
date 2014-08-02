@@ -13,7 +13,7 @@
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
     published by the Free Software Foundation.
- 
+ n
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -269,9 +269,10 @@ function zosp_facebook_js_sdk($c) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={$app_id}";
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId={$app_id}&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+
 END;
 
 ?>
@@ -360,7 +361,7 @@ END;
 		{
 			$new_content .= <<<END
 <div class="zosp-social-button zosp-social-pinit">
-	<a href="//www.pinterest.com/pin/create/button/?url={$url}&media={$image}&description={$title}" data-pin-do="buttonPin" data-pin-config="above" data-pin-color="white"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_20.png" /></a>
+	<a href="//www.pinterest.com/pin/create/button/?url={$url}&media={$image}&description={$title}" data-pin-do="buttonPin" data-pin-config="none" data-pin-color="gray"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_20.png" /></a>
 </div>
 END;
 		}
@@ -368,18 +369,18 @@ END;
 		$new_content .= <<<END
 <!-- Google+ -->
 <div class="zosp-social-button zosp-social-plusone">
-	<div class="g-plusone" data-size="tall" data-annotation="bubble"></div>
+	<div class="g-plusone" data-size="tall" data-annotation="none"></div>
 </div>
 
 <!-- Twitter -->
 <div class="zosp-social-button zosp-social-twitter">
-	<a href="https://twitter.com/share" class="twitter-share-button" data-via="{$twitter_username}" data-count="vertical">Tweet</a>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="{$twitter_username}" data-count="none">Tweet</a>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </div>
 	
 <!-- Facebook -->
 <div class="zosp-social-button zosp-social-facebook">
-	<div class="fb-like" data-href="{$url}" data-layout="box_count" data-action="like" data-show-faces="false" data-share="{$send}"></div>
+	<div class="fb-like" data-href="{$url}" data-layout="button" data-action="like" data-show-faces="false" data-share="{$send}"></div>
 </div>
 
 </div>			
