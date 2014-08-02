@@ -1,8 +1,22 @@
+.zosp-social-buttons {
+	height: 28px;
+}
+
 .zosp-social-buttons .zosp-social-button
 {
-    display: inline-block;
-    padding: 0 8px 0 0;
-    margin: 0;
+    padding-top: 4px;
+    margin-right: 8px;
+    float: left;
+    height: 24px;
+}
+
+.zosp-social-buttons .zosp-social-twitter {
+	height: 24px;
+}
+
+.zosp-social-buttons .zosp-social-facebook {
+	padding-top: 0;
+	height: 28px;
 }
 
 #facebook-comments 
@@ -17,3 +31,4 @@
     font-size: 18px;
     padding: 18px 0;
 }
+
