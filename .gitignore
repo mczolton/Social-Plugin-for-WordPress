@@ -14,3 +14,4 @@ TODO
 *.orig.phtml
 .htaccess
 .DS_Store
+sftp-config.json

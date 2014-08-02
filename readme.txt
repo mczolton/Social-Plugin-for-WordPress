@@ -3,8 +3,8 @@ Contributors: mczolton
 Donate link: http://zolton.org/
 Tags: facebook, twitter, social, google, pinterest
 Requires at least: 3.7
-Tested up to: 3.7.1
-Stable tag: 1.5.1
+Tested up to: 3.9.1
+Stable tag: 1.5.2
 
 A simple plugin for WordPress that integrates a blog with popular social 
 networking sites such as Facebook and Twitter.
@@ -62,6 +62,13 @@ post or page to ensure that a featured image is set.
 1. screenshot-2.png
 
 == Changelog ==
+
+= 1.5.2 =
+* Modified for use with the Twenty Fourteen theme. 
+If you are using Twenty Fourteen, set your Facebook comment width to 474.
+* Updated social plugins to latest SDKs (where available).
+* Modified alignment of social buttons.
+* Tested with Wordpress 3.9.1.
 
 = 1.5.1 =
 * Updated social plugins to HTML5 compatible versions (where available).
