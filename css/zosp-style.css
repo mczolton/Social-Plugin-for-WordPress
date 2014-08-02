@@ -1,5 +1,5 @@
 .zosp-social-buttons {
-	height: 28px;
+    height: 28px;
 }
 
 .zosp-social-buttons .zosp-social-button
@@ -11,24 +11,33 @@
 }
 
 .zosp-social-buttons .zosp-social-twitter {
-	height: 24px;
+    height: 24px;
 }
 
 .zosp-social-buttons .zosp-social-facebook {
-	padding-top: 0;
-	height: 28px;
+    padding-top: 0;
+    height: 28px;
 }
 
 #facebook-comments 
 {
     margin: 0 auto;
+    padding-left: 28px;
+}
+
+#facebook-comments.full-width 
+{
+    margin: 0 auto;
+    padding-left: 0px;
+    
 }
 
 #facebook-reply-title
 {
-    font: normal 36px 'Droid Sans', Arial, sans-serif;
-    text-shadow: 1px 1px 1px #ccc;
+    text-transform: uppercase;
+    /* font: normal 36px 'Droid Sans', Arial, sans-serif; */
+    text-shadow: 0px 1px 1px #ccc;
     font-size: 18px;
-    padding: 18px 0;
+    padding: 12px 0;
+    margin: 12px 0;
 }
-

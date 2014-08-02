@@ -3,12 +3,12 @@
 /*  Plugin Name: Zolton.org Social Plugin
     Plugin URI: http://www.zolton.org/projects/social-plugin-for-wordpress/
     Description: Simple social networking integration for Wordpress.
-    Version: 1.5.1	
+    Version: 1.5.2	
     Author: Mark Zolton
     Author URI: http://www.zolton.org
     License: GPL2
 
-    Copyright 2013  Mark Zolton  (email : mark@zolton.org)
+    Copyright 2014  Mark Zolton  (email : mark@zolton.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -28,7 +28,7 @@
 define( 'ZOSP_FB_APPID', '000000000000000' ); 
 define( 'ZOSP_TWITTER_USERNAME', 'mytwitterusername'); 
 define( 'ZOSP_FB_IMAGE', 'http://www.example.org/images/example.png'); 
-define( 'ZOSP_FB_COMMENT_WIDTH', '600' );
+define( 'ZOSP_FB_COMMENT_WIDTH', '474' );
 // define( 'ZOSP_FB_LIKE_SEND', 'true' ); 
 // define( 'ZOSP_HIDE_WPCOMMENTS', 'false' );
 
@@ -303,17 +303,19 @@ function zosp_facebook_comments () {
 		$width = $options['fb_comment_width'];
 		
 		/* Sets the width of Facebook Comments based on the template.
-		 * At Zolton.org, we use a template called "onecolumn-page" 
-		 * that is wider than a multi-column page. If "onecolumn-page" 
-		 * is not in use, just the multi-column width.
+		 * At zolton.org, we use a template called "onecolumn-page" 
+		 * or "full-width" that is wider than a multi-column page. If 
+		 * "onecolumn-page" or "full-width" is not in use, just the 
+		 * multi-column width.
 		 */
-		if( strpos( get_page_template(), 'onecolumn' ) ) {
-			$width = '640';
+		if( strpos( get_page_template(), 'onecolumn' ) || strpos( get_page_template(), 'full-width' ) ) {
+			// $width = '640';
+			$fullWidthClass = 'full-width'; 
 		} 
 		
 		echo <<<END
 <!-- ZO: Facebook Comments -->
-<div id="facebook-comments" style="width: {$width}px;">
+<div id="facebook-comments" style="width: {$width}px;" class="{$fullWidthClass}">
 <h3 id="facebook-reply-title">Add a Facebook Comment</h3>
 <fb:comments href="{$url}" num_posts="3" width="{$width}" publish></fb:comments>
 </div>
@@ -331,7 +333,7 @@ function zosp_social_buttons( $content ) {
 	$new_content = '';
 	
 	// If this is a single post, add additional OG tags (generally used by the Like Button).
-	if( is_singular() && comments_open() ) {
+	if( is_singular() && comments_open() && in_the_loop()) {
 		
 		$options = get_option('zosp_options');
 		
